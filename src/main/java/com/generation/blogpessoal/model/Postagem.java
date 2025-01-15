@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -30,6 +33,11 @@ public class Postagem {
 	
 	@UpdateTimestamp // ele atualiza o horario em tempo real
 	private LocalDateTime data; // Data 10/10/2025 e horários
+	
+	@ManyToOne //indica que a Classe Postagem será o lado N:1 e terá um Objeto da Classe Tema, que no modelo Relacional será a Chave Estrangeira
+	@JsonIgnoreProperties("postagem") //Para evitar um Loop Infinito
+	private Tema tema; //Relação entre a tabela postagem com a tema / Representa a chave estrangeira
+	
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +62,13 @@ public class Postagem {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
+	public Tema getTema() {
+		return tema;
+	}
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
+	
 
 	
 	
