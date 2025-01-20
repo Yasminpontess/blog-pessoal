@@ -38,6 +38,10 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem") //Para evitar um Loop Infinito
 	private Tema tema; //Relação entre a tabela postagem com a tema / Representa a chave estrangeira
 	
+	@ManyToOne  
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +59,12 @@ public class Postagem {
 	}
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	public LocalDateTime getData() {
 		return data;
